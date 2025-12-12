@@ -2,14 +2,14 @@
 import { useState } from "react";
 
 const jesusArray = (count: number)=>{
-  let tempArr: number[] = [];
+  const tempArr: number[] = [];
       for(let i  =0; i < count; i++){
           tempArr.push(i)
       }
     return tempArr;
 }
 export default function Home() {
-  const [count, setcount] = useState<any>(0);
+  const [count, setcount] = useState<number>(0);
   
   return (
     <div className="">
@@ -20,7 +20,10 @@ export default function Home() {
             <button style={{color: 'green', backgroundColor: 'white', padding: '0.25rem 0.5rem'}}onClick={()=> {setcount(count+ 1) 
               }}>+</button>
            <span style={{margin: '0.5rem'}}>{count}</span>
-          <button style={{color: 'red', backgroundColor: 'white', padding: '0.25rem 0.5rem'}} onClick={()=> {count != 0 ?setcount(count-1): null
+          <button style={{color: 'red', backgroundColor: 'white', padding: '0.25rem 0.5rem'}} onClick={()=> {
+            if (count !== 0) {
+              setcount(count-1);
+            }
           }}>-</button>
           <button style={{background: 'white', color: 'red', marginLeft: 'px', padding: '0.25rem 0.5rem'}} onClick={()=>{ setcount(0)}}>RESET</button>
             </div>
@@ -37,7 +40,7 @@ export default function Home() {
            :
           jesusArray(count).map((key, inedex)=>{
             return(
-              <div>
+              <div key={key}>
             <img
           id="jesusName"
           className=""
